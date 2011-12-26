@@ -1,9 +1,37 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.godmonth</groupId>
 	<artifactId>memcached-chart-report</artifactId>
 	<version>0.3-SNAPSHOT</version>
+	<developers>
+		<developer>
+			<email>link2people@gmail.com</email>
+		</developer>
+	</developers>
+	<description>memcached-chart-report</description>
+	<url>https://github.com/godmonth/memcached-chart-report</url>
+	<issueManagement>
+		<system>github</system>
+		<url>https://github.com/godmonth/memcached-chart-report/issues</url>
+	</issueManagement>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>oss</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<connection>scm:git:git@github.com:godmonth/memcached-chart-report.git</connection>
+		<developerConnection>scm:git:git@github.com:godmonth/memcached-chart-report.git</developerConnection>
+		<url>http://github.com/godmonth/memcached-chart-report</url>
+	</scm>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -100,5 +128,31 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	<profiles>
+		<profile>
+			<id>release-sign-artifacts</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
